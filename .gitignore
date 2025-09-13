@@ -210,3 +210,5 @@ cred.txt
 .env
 
 data/
+
+models/
