@@ -1,4 +1,4 @@
-# put at the top of src/data/data_ingestion.py (or a small runner script)
+
 from pathlib import Path
 import sys
 
