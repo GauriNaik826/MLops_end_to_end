@@ -212,3 +212,5 @@ cred.txt
 data/
 
 models/
+
+_tmp_model_artifacts/
