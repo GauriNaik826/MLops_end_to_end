@@ -11,7 +11,7 @@ stages:
     - data/raw
 
   data_preprocessing:
-    cmd: python src/data_pipeline/data_ingestion.py
+    cmd: python src/data_pipeline/data_preprocessing.py
     deps:
     - data/raw
     - src/data_pipeline/data_preprocessing.py

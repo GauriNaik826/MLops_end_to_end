@@ -209,8 +209,6 @@ __marimo__/
 cred.txt
 .env
 
-data/ 
-
 models/
 
 _tmp_model_artifacts/
@@ -218,4 +216,6 @@ _tmp_model_artifacts/
 reports/
 
 local_s3/
+
+data/
 
