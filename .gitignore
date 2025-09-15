@@ -209,6 +209,8 @@ __marimo__/
 cred.txt
 .env
 
+data/ 
+
 models/
 
 _tmp_model_artifacts/
