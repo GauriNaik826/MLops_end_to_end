@@ -155,7 +155,7 @@ print(f"Fetching model from: {model_uri}")
 # Load the model from the registry into memory as a PyFunc using the uri.
 model = mlflow.pyfunc.load_model(model_uri)
 # Load your saved text vectorizer (CountVectorizer/TF-IDF) so you can transform raw text the same way as during training.
-vectorizer = pickle.load(open('../models/vectorizer.pkl', 'rb'))
+vectorizer = pickle.load(open('models/vectorizer.pkl', 'rb'))
 
 # Routes
 # We also have made a home route 
