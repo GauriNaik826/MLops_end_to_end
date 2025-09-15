@@ -37,9 +37,6 @@ jobs:
         run: |
           dvc repro
 
-
-          name: CI Pipeline
-
       - name: Run model tests
         env:
           CAPSTONE_TEST: ${{ secrets.CAPSTONE_TEST }}
