@@ -214,3 +214,8 @@ data/
 models/
 
 _tmp_model_artifacts/
+
+reports/
+
+local_s3/
+

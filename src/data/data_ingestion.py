@@ -113,13 +113,13 @@ def main():
     try:
         # Reads configuration from a YAML file (e.g., test split size) using the helper you wrote earlier.
         # So you don’t hard-code knobs in code—easier to reproduce and change via config.
-        # params = load_params(params_path="params.yaml")
+        params = load_params(params_path="params.yaml")
 
         # Pulls test_size from that YAML (typical structure below).
-        # test_size = params['data_ingestion']['test_size']
+        test_size = params['data_ingestion']['test_size']
 
         # The commented line is a fallback/example if you want to hard-code 0.2 (20%) during quick tests.
-        test_size = 0.2 
+        # test_size = 0.2 
 
         # Downloads & reads the CSV into a DataFrame using your load_data() (which logs and handles parser errors).
         df = load_data(data_url='notebooks/data.csv')

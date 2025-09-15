@@ -118,11 +118,11 @@ def save_data(df: pd.DataFrame, file_path: str)-> None:
 def main():
     try: 
         # Reads configuration from params.yaml (a single source of truth for knobs like max_features, paths, etc.).
-        # params = load_params('params.yaml')
+        params = load_params('params.yaml')
         # Pulls the CountVectorizer limit (how many top tokens to keep) from the YAML.
-        # max_features = params['feature_engineering']['max_features']
+        max_features = params['feature_engineering']['max_features']
 
-        max_features = 20
+        # max_features = 20
         # Loads the preprocessed splits (produced by your preprocessing step) from data/interim/… into DataFrames.
         # At this stage, text is cleaned (lowercased, no URLs, etc.) but not vectorized yet.
         train_data = load_data('./data/interim/train_processed.csv')
