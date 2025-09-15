@@ -35,7 +35,6 @@ jobs:
         env:
           CAPSTONE_TEST: ${{ secrets.CAPSTONE_TEST }}
         run: |
-          cd MLops_end_to_end
           dvc repro
 
       
