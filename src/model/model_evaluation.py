@@ -160,6 +160,7 @@ def main():
             # metrics the metrics dictinary is returned.
             metrics = evaluate_model(clf, X_test, y_test)
             # save those metrics locally as a JSON file for later inspection/versioning.
+            os.makedirs("reports",exist_ok=True)
             save_metrics(metrics, 'reports/metrics.json')
      
             # Record each metric in the current MLflow run so they appear in the MLflow UI and can be compared across runs.

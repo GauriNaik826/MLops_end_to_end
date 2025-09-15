@@ -5,6 +5,7 @@ from sklearn.linear_model import LogisticRegression
 import yaml
 from pathlib import Path
 import sys
+import os
 # repo_root = .../MLops_end_to_end
 repo_root = Path(__file__).resolve().parents[2]  # adjust if your depth differs
 sys.path.insert(0, str(repo_root))
@@ -69,6 +70,8 @@ def main():
         # Trains the classifier by calling train_model (defined above in the file).
         #  This initializes LogisticRegression with tuned hyperparameters, fits it on X_train, y_train, and returns the fitted estimator as clf.
         clf = train_model(X_train, y_train)
+
+        os.makedirs("models",exist_ok=True)
         # Persists the trained model to models/model.pkl using the helper defined earlier.
         save_model(clf, 'models/model.pkl')
     except Exception as e:
