@@ -86,6 +86,9 @@ def apply_bow(train_data: pd.DataFrame, test_data: pd.DataFrame, max_features: i
         test_df  = pd.DataFrame(X_test_bow.toarray())
         test_df["label"] = y_test
 
+        # Ensure the 'models/' directory exists
+        os.makedirs('models', exist_ok=True)
+
         #Saves the fitted vectorizer to disk so inference (and any future runs) use the exact same vocabulary/token mapping.  
         pickle.dump(vectorizer, open('models/vectorizer.pkl', 'wb'))
 
