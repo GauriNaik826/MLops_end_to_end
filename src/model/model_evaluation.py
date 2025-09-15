@@ -207,6 +207,7 @@ def main():
             # Write a small JSON (your helper) with metadata about this run: 
             # the run_id and where the model artifact lives. Useful for downstream automation.
             # Save model info
+            os.makedirs("reports",exist_ok=True)
             save_model_info(run.info.run_id, "model", 'reports/experiment_info.json')
             
             # Attach the metrics.json file as an artifact to the run, 
