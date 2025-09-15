@@ -121,7 +121,6 @@ multidict==6.6.4
 mypy_extensions==1.1.0
 namex==0.1.0
 nest-asyncio==1.6.0
-networkx==3.5
 nltk==3.9.1
 numpy==1.26.4
 oauthlib==3.3.1
