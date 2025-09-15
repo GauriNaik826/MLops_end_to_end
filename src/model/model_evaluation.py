@@ -20,7 +20,12 @@ from src.logger import logging
 from mlflow.models import infer_signature
 from tempfile import TemporaryDirectory
 from mlflow.models import infer_signature
+import shutil
+import os
 import scipy
+from dotenv import load_dotenv
+load_dotenv()
+
 # Below code block is for p
 # roduction use
 # -------------------------------------------------------------------------------------
@@ -179,11 +184,11 @@ def main():
             # Upload the trained model artifact to the run, under the artifact path model. 
             # MLflow also captures the flavor (sklearn) for later loading/serving.
             # Log model to MLflow pip install "mlflow==2.12.1"
-            mlflow.sklearn.log_model(clf, "model")
+            # mlflow.sklearn.log_model(clf, "model")
 
             # Save model locally and upload as artifacts works on DagsHub
-            # example = X_test[:5].toarray() if scipy.sparse.issparse(X_test) else X_test[:5]
-            # signature = infer_signature(example, clf.predict(example))
+            example = X_test[:5].toarray() if scipy.sparse.issparse(X_test) else X_test[:5]
+            signature = infer_signature(example, clf.predict(example))
             # TemporaryDirectory() creates a temporary folder on your local filesystem.
             # As soon as the with TemporaryDirectory() as tmpdir: block ends, Python automatically deletes the folder and everything inside it.
             # uploads the contents to MLflow’s artifact store (DagsHub in your case) before deletion.
@@ -198,11 +203,15 @@ def main():
             #    # This creates an artifacts/model/… tree in the run
             # mlflow.log_artifacts(local_dir, artifact_path="model")
 
-            # local_dir = "./_tmp_model_artifacts/sk_model_eval"
-            # os.makedirs(local_dir, exist_ok=True)
-            # mlflow.sklearn.save_model(clf, local_dir, input_example=example, signature=signature)
+            local_dir = "./_tmp_model_artifacts/sk_model_eval"
+            # remove old directory if exists
+            if os.path.exists(local_dir):
+                shutil.rmtree(local_dir)
 
-            # mlflow.log_artifacts(local_dir, artifact_path="model")
+            os.makedirs(local_dir, exist_ok=True)
+            mlflow.sklearn.save_model(clf, local_dir, input_example=example, signature=signature)
+
+            mlflow.log_artifacts(local_dir, artifact_path="model")
             
             # Write a small JSON (your helper) with metadata about this run: 
             # the run_id and where the model artifact lives. Useful for downstream automation.
