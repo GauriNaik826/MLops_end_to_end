@@ -1,14 +1,19 @@
 # load test + signature test + performance test
-
+# Built-in Python testing framework.
 import unittest
+# For model loading and interaction with MLflow Model Registry.
 import mlflow
 import os
 import pandas as pd
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 import pickle
 
+# A test class that inherits from unittest.TestCase.
+# All test methods inside this class will be run as part of the unit test suite.
 class TestModelLoading(unittest.TestCase):
 
+    # This method runs once before any test method is run.
+    # Used to load the model, vectorizer, and test data.
     @classmethod
     def setUpClass(cls):
         # Set up DagsHub credentials for MLflow tracking
@@ -28,8 +33,10 @@ class TestModelLoading(unittest.TestCase):
 
         # Load the new model from MLflow model registry
         cls.new_model_name = "my_model"
+        # Gets the latest model version from the Staging stage.
         cls.new_model_version = cls.get_latest_model_version(cls.new_model_name)
         cls.new_model_uri = f'models:/{cls.new_model_name}/{cls.new_model_version}'
+        # Constructs the model URI and loads it using mlflow.pyfunc.
         cls.new_model = mlflow.pyfunc.load_model(cls.new_model_uri)
 
         # Load the vectorizer
@@ -38,19 +45,23 @@ class TestModelLoading(unittest.TestCase):
         # Load holdout test data
         cls.holdout_data = pd.read_csv('data/processed/test_bow.csv')
 
+    # Uses the MLflow client to get the latest model version in a given stage (default: Staging).
     @staticmethod
     def get_latest_model_version(model_name, stage="Staging"):
         client = mlflow.MlflowClient()
         latest_version = client.get_latest_versions(model_name, stages=[stage])
         return latest_version[0].version if latest_version else None
-
+    # Asserts that the model was loaded and is not None.
     def test_model_loaded_properly(self):
         self.assertIsNotNone(self.new_model)
 
+    # Verifies input/output shape compatibility.
     def test_model_signature(self):
         # Create a dummy input for the model based on expected input shape
         input_text = "hi how are you"
+        # Vectorizes a sample input text.
         input_data = self.vectorizer.transform([input_text])
+        # Converts it to a DataFrame (as expected by the model).
         input_df = pd.DataFrame(input_data.toarray(), columns=[str(i) for i in range(input_data.shape[1])])
 
         # Predict using the new model to verify the input and output shapes
@@ -60,6 +71,8 @@ class TestModelLoading(unittest.TestCase):
         self.assertEqual(input_df.shape[1], len(self.vectorizer.get_feature_names_out()))
 
         # Verify the output shape (assuming binary classification with a single output)
+        # Checks input feature count matches vectorizer's output.
+        # Checks prediction output length and shape (should be 1D).
         self.assertEqual(len(prediction), input_df.shape[0])
         self.assertEqual(len(prediction.shape), 1)  # Assuming a single output column for binary classification
 
