@@ -25,28 +25,28 @@ import scipy
 # roduction use
 # -------------------------------------------------------------------------------------
 # Set up DagsHub credentials for MLflow tracking
-# dagshub_token = os.getenv("CAPSTONE_TEST")
+dagshub_token = os.getenv("CAPSTONE_TEST")
 # Read a personal access token (PAT) for DagsHub from CAPSTONE_TEST. Fail fast if it’s missing
-# if not dagshub_token:
-#     raise EnvironmentError("CAPSTONE_TEST environment variable is not set")
+if not dagshub_token:
+    raise EnvironmentError("CAPSTONE_TEST environment variable is not set")
 
 # MLflow uses basic auth when talking to a remote server. On DagsHub, both username & password are set to the token.
-# os.environ["MLFLOW_TRACKING_USERNAME"] = dagshub_token
-# os.environ["MLFLOW_TRACKING_PASSWORD"] = dagshub_token
+os.environ["MLFLOW_TRACKING_USERNAME"] = dagshub_token
+os.environ["MLFLOW_TRACKING_PASSWORD"] = dagshub_token
 
 # Build the tracking URI that points MLflow at your repo’s tracking server on DagsHub: https://dagshub.com/<owner>/<repo>.mlflow.
-# dagshub_url = "https://dagshub.com"
-# repo_owner = "vikashdas770"
-# repo_name = "YT-Capstone-Project"
+dagshub_url = "https://dagshub.com"
+repo_owner = "GauriNaik826"
+repo_name = "MLops_end_to_end"
 
 # Set up MLflow tracking URI
-# mlflow.set_tracking_uri(f'{dagshub_url}/{repo_owner}/{repo_name}.mlflow')
+mlflow.set_tracking_uri(f'{dagshub_url}/{repo_owner}/{repo_name}.mlflow')
 # -------------------------------------------------------------------------------------
 
 # Below code block is for local use
-# -------------------------------------------------------------------------------------
-mlflow.set_tracking_uri('https://dagshub.com/GauriNaik826/MLops_end_to_end.mlflow')
-dagshub.init(repo_owner='GauriNaik826', repo_name='MLops_end_to_end', mlflow=True)
+# # -------------------------------------------------------------------------------------
+# mlflow.set_tracking_uri('https://dagshub.com/GauriNaik826/MLops_end_to_end.mlflow')
+# dagshub.init(repo_owner='GauriNaik826', repo_name='MLops_end_to_end', mlflow=True)
 # -------------------------------------------------------------------------------------
 
 # loads the model we had trained and saved.
