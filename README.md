@@ -2,7 +2,7 @@
 
 ## 📌 Overview
 
-This project is an **end-to-end MLops pipeline** for sentiment analysis that takes a machine learning model from **data ingestion → preprocessing → training → evaluation → tracking → deployment**.
+This project is an **end-to-end MLops pipeline** for IMDB dataset sentiment Classification that takes a machine learning model from **data ingestion → preprocessing → training → evaluation → tracking → deployment**.
 It integrates **MLflow, DVC, S3, Docker, Flask, GitHub Actions (CI/CD)** and experiment tracking with **DagsHub**.
 
 ---
